@@ -6,7 +6,12 @@
     // if we are on windows OS we activate the perfectScrollbar function
     if (document.getElementsByClassName('main-content')[0]) {
       var mainpanel = document.querySelector('.main-content');
-      var ps = new PerfectScrollbar(mainpanel);
+      var ps = new PerfectScrollbar(mainpanel, {
+        swipeEasing : true,
+        wheelSpeed : 2,
+        wheelPropagation : false,
+        minScrollbarLength : 20,
+      });
     };
 
     if (document.getElementsByClassName('sidenav')[0]) {
@@ -268,7 +273,7 @@ function navbarBlurOnScroll(id) {
   const navbar = document.getElementById(id);
   let navbarScrollActive = navbar ? navbar.getAttribute("data-scroll") : false;
   let scrollDistance = 5;
-  let classes = ['blur', 'shadow-blur', 'left-auto'];
+  let classes = ['blur', 'shadow-xl', 'left-auto'];
   let toggleClasses = ['shadow-none'];
 
   if (navbarScrollActive == 'true') {
@@ -585,15 +590,18 @@ window.onload = function() {
 };
 
 // Toggle Sidenav
-const iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
+const iconNavbarSidenav = document.querySelectorAll('.iconNavbarSidenav');
 const iconSidenav = document.getElementById('iconSidenav');
 const sidenav = document.getElementById('sidenav-main');
 let body = document.getElementsByTagName('body')[0];
 let className = 'g-sidenav-pinned';
 
-if (iconNavbarSidenav) {
+/*if (iconNavbarSidenav) {
   iconNavbarSidenav.addEventListener("click", toggleSidenav);
-}
+}*/
+iconNavbarSidenav && iconNavbarSidenav.forEach(function(el) {
+  el.addEventListener("click", toggleSidenav);
+})
 
 if (iconSidenav) {
   iconSidenav.addEventListener("click", toggleSidenav);
